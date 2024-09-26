@@ -2,14 +2,14 @@
 @inject ISender Sender
 @inject NavigationManager NavigationManager
 
+<PageTitle>Register</PageTitle>
 
-
-<div class="container-xxl mb-3">
-    <div class="mt-3">
-        <h3>RegisterUser</h3>
-    </div>
+<div class="container-xxl mb-3">    
     <div class="col-12 col-md-6">
-        <EditForm Model="registerUserModel">
+        <div class="mt-3 d-flex justify-content-center align-content-center">
+            <h3>Register</h3>
+        </div>
+        <EditForm Model="registerUserModel" OnValidSubmit="HandleValidSubmit" FormName="RegisterUserForm" >
             <DataAnnotationsValidator />
 
             <div class="mb-3">
@@ -19,18 +19,19 @@
             </div>
             <div class="mb-3">
                 <label for="Password" class="form-label">Passord</label>
-                <InputText id="Password" class="form-control" @bind-Value="registerUserModel.Password" />
+                <InputText id="Password" type="password" class="form-control" @bind-Value="registerUserModel.Password" />
                 <ValidationMessage For="@(() => registerUserModel.Password)" />
             </div>
             <div class="mb-3">
                 <label for="ConfirmPassword" class="form-label">Gjenta Passord</label>
-                <InputText id="ConfirmPassword" class="form-control" @bind-Value="registerUserModel.ConfirmPassword" />
+                <InputText id="ConfirmPassword" type="password" class="form-control" @bind-Value="registerUserModel.ConfirmPassword" />
                 <ValidationMessage For="@(() => registerUserModel.ConfirmPassword)" />
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </EditForm>
     </div>
 </div>
+
 @code {
     [SupplyParameterFromForm(FormName = "RegisterUserForm")]
     public RegisterUserModel registerUserModel { get; set; } = new RegisterUserModel();
