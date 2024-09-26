@@ -1,0 +1,50 @@
+﻿@page "/LoginUser"
+@inject ISender Sender
+@inject NavigationManager NavigationManager
+
+<PageTitle>Logg inn</PageTitle>
+
+<h3>Logg inn</h3>
+
+<EditForm Model="loginUserModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="mb-3">
+        <label for="UserName" class="form-label">Brukernavn</label>
+        <InputText id="UserName" class="form-control" @bind-Value="loginUserModel.UserName" />
+        <ValidationMessage For="@(() => loginUserModel.UserName)" />
+    </div>
+    <div class="mb-3">
+        <label for="Password" class="form-label">Passord</label>
+        <InputText id="Password" class="form-control" @bind-Value="loginUserModel.Password" />
+        <ValidationMessage For="@(() => loginUserModel.Password)" />
+    </div>
+    <button type="submit" class="btn btn-primary">Logg inn</button>
+
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm(FormName = "LoginUserForm")]
+    public LoginUserModel loginUserModel { get; set; } = new LoginUserModel();
+
+    private string ErrorMessage { get; set; } = string.Empty;
+
+    private async Task HandleValidSubmit()
+    {
+        var command = new LoginUserCommand
+        {
+            UserName = loginUserModel.UserName,
+            Password = loginUserModel.Password
+        };
+
+        var result = await Sender.Send(command);
+        if(result.Success)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            ErrorMessage = result.Error ?? "An error occurred";
+        }
+    }
+}
