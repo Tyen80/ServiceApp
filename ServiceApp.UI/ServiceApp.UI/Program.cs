@@ -1,6 +1,6 @@
 using ServiceApp.Application;
 using ServiceApp.Infrastructure;
-using ServiceApp.UI.Components;
+using ServiceApp.UI;
 
 var builder = WebApplication.CreateBuilder(args);
 
