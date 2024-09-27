@@ -17,4 +17,8 @@
 	  <ProjectReference Include="..\ServiceApp.Domain\ServiceApp.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Emails\" />
+	</ItemGroup>
+
 </Project>
