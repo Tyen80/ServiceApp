@@ -33,6 +33,9 @@ public static class DependencyInjection
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IEmailManagerService, EmailManagerService>();
+        services.AddScoped<ISendChildInviteService, SendChildInviteService>();
+        services.AddScoped<IFamilyExistService, FamilyExistService>();
+        services.AddScoped<IUserRolesService, UserRolesService>();
 
         services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
         services.AddCascadingAuthenticationState();

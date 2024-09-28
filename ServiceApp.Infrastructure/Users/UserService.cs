@@ -15,6 +15,16 @@ public class UserService : IUserService
         _httpContextAccessor = httpContextAccessor;
     }
 
+    public async Task<string> GetCurrentUserByFamilyIdAsync()
+    {
+        var user = await GetCurrentUserAsync();
+        if (user is null)
+        {
+            throw new UserNotAuthorizedException();
+        }
+        return user.FamilyId ?? string.Empty;
+    }
+
     public async Task<string> GetCurrentUserByIdAsync()
     {
         var user = await GetCurrentUserAsync();
