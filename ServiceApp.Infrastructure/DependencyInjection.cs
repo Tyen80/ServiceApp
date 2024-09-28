@@ -5,7 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceApp.Application.Authentication;
+using ServiceApp.Domain.Email;
 using ServiceApp.Infrastructure.Authentication;
+using ServiceApp.Infrastructure.Email;
+using ServiceApp.Infrastructure.Users;
 
 namespace ServiceApp.Infrastructure;
 public static class DependencyInjection
@@ -26,6 +29,9 @@ public static class DependencyInjection
     {
         services.AddScoped<ILoginUserService, LoginUserService>();
         services.AddScoped<IRegisterUserService, RegisterUserService>();
+        services.AddScoped<IEmailConfirmService, EmailConfirmService>();
+        services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<IUserService, UserService>();
 
         services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
         services.AddCascadingAuthenticationState();

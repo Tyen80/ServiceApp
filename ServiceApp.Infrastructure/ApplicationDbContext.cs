@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ServiceApp.Domain.Tasks;
 using ServiceApp.Domain.ToDoItems;
-using ServiceApp.Infrastructure.Authentication;
+using ServiceApp.Infrastructure.Users;
 
 namespace ServiceApp.Infrastructure;
 public class ApplicationDbContext : IdentityDbContext<User>

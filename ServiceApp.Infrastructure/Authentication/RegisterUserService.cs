@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using ServiceApp.Application;
 using ServiceApp.Application.Authentication;
+using ServiceApp.Infrastructure.Users;
 
 namespace ServiceApp.Infrastructure.Authentication;
 public class RegisterUserService : IRegisterUserService
