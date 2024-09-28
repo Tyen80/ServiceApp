@@ -15,13 +15,13 @@ public class RegisterUserService : IRegisterUserService
         _emailManagerService = emailManagerService;
     }
 
-    public async Task<RegisterUserResponse> RegisterNewUserAsync(string userName, string email, string password)
+    public async Task<RegisterUserResponse> RegisterNewUserAsync(string userName, string email, string password, string familyId)
     {
         var user = new User
         {
             UserName = userName,
             Email = email,
-            EmailConfirmed = false
+            FamilyId = string.IsNullOrWhiteSpace(familyId) ? Guid.NewGuid().ToString() : familyId
         };
 
         var result = await _userManager.CreateAsync(user, password);

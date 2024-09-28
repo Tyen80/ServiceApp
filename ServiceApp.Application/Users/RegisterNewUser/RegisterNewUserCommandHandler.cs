@@ -12,7 +12,7 @@ public class RegisterNewUserCommandHandler : ICommandHandler<RegisterNewUserComm
 
     public async Task<Result> Handle(RegisterNewUserCommand request, CancellationToken cancellationToken)
     {
-        var result = await _registerUserService.RegisterNewUserAsync(request.UserName, request.Email, request.Password);
+        var result = await _registerUserService.RegisterNewUserAsync(request.UserName, request.Email, request.Password, request.FamilyId);
         if (result.Succeeded)
         {
             return Result.Ok();
