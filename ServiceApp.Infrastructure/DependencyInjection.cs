@@ -32,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<IEmailConfirmService, EmailConfirmService>();
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IEmailManagerService, EmailManagerService>();
 
         services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
         services.AddCascadingAuthenticationState();

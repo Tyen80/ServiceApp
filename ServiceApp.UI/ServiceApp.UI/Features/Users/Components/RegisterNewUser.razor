@@ -18,6 +18,11 @@
                 <ValidationMessage For="@(() => registerUserModel.UserName)" />
             </div>
             <div class="mb-3">
+                <label for="Email" class="form-label">Epost</label>
+                <InputText id="UserName" class="form-control" @bind-Value="registerUserModel.Email" />
+                <ValidationMessage For="@(() => registerUserModel.Email)" />
+            </div>
+            <div class="mb-3">
                 <label for="Password" class="form-label">Passord</label>
                 <InputText id="Password" type="password" class="form-control" @bind-Value="registerUserModel.Password" />
                 <ValidationMessage For="@(() => registerUserModel.Password)" />

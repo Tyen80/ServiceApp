@@ -7,10 +7,12 @@ namespace ServiceApp.Infrastructure.Authentication;
 public class RegisterUserService : IRegisterUserService
 {
     private readonly UserManager<User> _userManager;
+    private readonly IEmailManagerService _emailManagerService;
 
-    public RegisterUserService(UserManager<User> userManager)
+    public RegisterUserService(UserManager<User> userManager, IEmailManagerService emailManagerService)
     {
         _userManager = userManager;
+        _emailManagerService = emailManagerService;
     }
 
     public async Task<RegisterUserResponse> RegisterNewUserAsync(string userName, string email, string password)
@@ -19,7 +21,7 @@ public class RegisterUserService : IRegisterUserService
         {
             UserName = userName,
             Email = email,
-            EmailConfirmed = true
+            EmailConfirmed = false
         };
 
         var result = await _userManager.CreateAsync(user, password);
@@ -28,6 +30,8 @@ public class RegisterUserService : IRegisterUserService
             Succeeded = result.Succeeded,
             Errors = result.Errors.Select(e => e.Description).ToList()
         };
+
+        await _emailManagerService.SendConfirmationEmailAsync(user);
         return response;
     }
 }
