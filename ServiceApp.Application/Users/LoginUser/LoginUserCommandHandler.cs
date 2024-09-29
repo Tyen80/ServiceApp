@@ -1,6 +1,4 @@
-﻿using ServiceApp.Application.Authentication;
-
-namespace ServiceApp.Application.Users.LoginUser;
+﻿namespace ServiceApp.Application.Users.LoginUser;
 public class LoginUserCommandHandler : ICommandHandler<LoginUserCommand>
 {
     private readonly ILoginUserService _loginUserService;

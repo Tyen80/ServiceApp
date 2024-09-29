@@ -1,6 +1,4 @@
-﻿using ServiceApp.Application.Authentication;
-
-namespace ServiceApp.Application.Users.RegisterNewUser;
+﻿namespace ServiceApp.Application.Users.RegisterNewUser;
 public class RegisterNewUserCommandHandler : ICommandHandler<RegisterNewUserCommand>
 {
     private readonly IRegisterUserService _registerUserService;

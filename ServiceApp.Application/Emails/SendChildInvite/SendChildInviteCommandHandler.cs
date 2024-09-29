@@ -1,6 +1,4 @@
-﻿using ServiceApp.Application.Authentication;
-
-namespace ServiceApp.Application.Emails.SendChildInvite;
+﻿namespace ServiceApp.Application.Emails.SendChildInvite;
 public class SendChildInviteCommandHandler : ICommandHandler<SendChildInviteCommand>
 {
     private readonly ISendChildInviteService _sendChildInviteService;

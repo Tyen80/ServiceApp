@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.WebUtilities;
-using ServiceApp.Application.Authentication;
 using System.Text;
 
 namespace ServiceApp.Application.Emails.EmailConfirm;
