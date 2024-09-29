@@ -6,8 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceApp.Application.Authentication;
 using ServiceApp.Domain.Email;
+using ServiceApp.Domain.Tasks;
 using ServiceApp.Infrastructure.Authentication;
 using ServiceApp.Infrastructure.Email;
+using ServiceApp.Infrastructure.Repositories;
 using ServiceApp.Infrastructure.Users;
 
 namespace ServiceApp.Infrastructure;
@@ -18,6 +20,7 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options =>
                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+        services.AddScoped<ITaskToDoRepository, TaskToDoRepository>();
 
 
         AddAuthentication(services);

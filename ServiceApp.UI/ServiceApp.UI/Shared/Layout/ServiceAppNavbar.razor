@@ -9,7 +9,16 @@
                 <li class="nav-item">
                     <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home</NavLink>
                 </li>
+                <AuthorizeView>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="tasks/create" Match="NavLinkMatch.All">Create Task</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="tasks" Match="NavLinkMatch.All">Tasks</NavLink>
+                    </li>
+                </AuthorizeView>
             </ul>
+      
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <AuthorizeView>
                     <Authorized>
@@ -19,6 +28,7 @@
                         <li class="nav-item">
                             <NavLink class="nav-link" href="logout">Logg ut</NavLink>
                         </li>
+                       
                     </Authorized>
                     <NotAuthorized>
                         <li class="nav-item">
@@ -27,6 +37,7 @@
                         <li class="nav-item">
                             <NavLink class="nav-link" href="registernewuser">Register</NavLink>
                         </li>
+                   
                     </NotAuthorized>
                 </AuthorizeView>
             </ul>

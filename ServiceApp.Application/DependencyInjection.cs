@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ServiceApp.Application.Tasks.TaskService;
 
 namespace ServiceApp.Application;
 public static class DependencyInjection
@@ -9,6 +10,9 @@ public static class DependencyInjection
         {
             configuration.RegisterServicesFromAssemblies(typeof(DependencyInjection).Assembly);
         });
+
+        services.AddScoped<ITaskToDoService, TaskToDoService>();
+
         return services;
     }
 }

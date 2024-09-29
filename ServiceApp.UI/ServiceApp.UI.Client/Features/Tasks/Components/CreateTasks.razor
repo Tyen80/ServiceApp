@@ -1,0 +1,110 @@
+﻿@page "/tasks/create"
+@page "/tasks/create/{Id:int}"
+@using ServiceApp.Application.Tasks.UpdateTask
+@inject ITaskToDoService TaskToDoService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveAuto
+
+<div class="container-xxl">
+    <div class="d-flex justify-content-center align-items-center mt-3">
+        <h3>Lag oppgave</h3>
+    </div>
+    <EditForm Model="task" OnValidSubmit="CreateTask">
+        <DataAnnotationsValidator />
+
+        <div class="mb-3">
+            <label  class="form-label">Gjøremål</label>
+            <InputText  class="form-control" @bind-Value="task.Title" />
+            <ValidationMessage For="@(() => task.Title)" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Beskrivelse</label>
+            <InputTextArea class="form-control" @bind-Value="task.Description" />
+            <ValidationMessage For="@(() => task.Description)" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Kroner</label>
+            <InputNumber class="form-control" @bind-Value="task.Amount" />
+            <ValidationMessage For="@(() => task.Amount)" />
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary" >Lagre</button>
+            <button type="button" class="btn btn-danger" @onclick="DeleteTask">Slett</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private TaskToDoViewModel task = new TaskToDoViewModel();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != 0)
+        {
+            var taskResponse = await TaskToDoService.GetTaskByIdAsync(Id);
+            task = taskResponse.Adapt<TaskToDoViewModel>();
+        }
+        else
+        {
+            task = new TaskToDoViewModel();
+        }
+    }
+
+    private async Task CreateTask()
+    {
+        if(Id > 0)
+        {
+            var command = new UpdateTaskToDoCommand
+            {
+                Id = Id,
+                Title = task.Title,
+                Description = task.Description,
+                Amount = task.Amount
+            };
+
+            var response = await TaskToDoService.UpdateTaskAsync(command);
+            if (response != null)
+            {
+                NavigationManager.NavigateTo("/tasks");
+            }
+
+        }
+
+        else
+        {
+            var command = new CreateTaskCommand
+            {
+                Title = task.Title,
+                Description = task.Description,
+                Amount = task.Amount
+            };
+        
+            try
+            {
+                var response = await TaskToDoService.CreateTaskAsync(command);
+                if (response != null)
+                {
+                    // Navigate to the tasks list or show a success message
+                    NavigationManager.NavigateTo("/tasks");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle error (e.g., show an error message)
+                Console.WriteLine($"Error creating task: {ex.Message}");
+            }
+        }        
+    }
+
+    private async Task DeleteTask()
+    {
+        var response = await TaskToDoService.DeleteTaskAsync(Id);
+        if (response)
+        {
+            NavigationManager.NavigateTo("/tasks");
+        }
+    }
+}
